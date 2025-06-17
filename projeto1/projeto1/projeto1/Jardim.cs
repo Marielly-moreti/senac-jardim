@@ -60,10 +60,59 @@ namespace projeto1
 
             mapa[playerX, playerY] = '@';
         }
-    
-    
-    static void
-    }    
+
+
+        static void desenharmapa()
+        {
+            for (int y = 0; y < altura; y++)
+            {
+                for (int x = 0; x < largura; x++)
+                {
+                    Console.Write(mapa[x, y]);
+                }
+
+                Console.Write(mapa{ playerX,y]);
+        }
+        }
+        static void atualizarposicao(ConsoleKey tecla)
+        {
+            int tempX = playerX;
+            int tempY = playerY;
+
+            switch (tecla)
+            {
+                case ConsoleKey.A: tempX--; break;
+                case ConsoleKey.D: tempX++; break;
+                case ConsoleKey.W: tempY--; break;
+                case ConsoleKey.S: tempY++; break;
+            }
+            if (mapa[tempX, tempY] == ' ')
+            {
+                mapa[playerX, playerY] = ' ';
+                mapa[tempX, tempY] = '@';
+
+                playerX = tempX;
+                playerY = tempY;
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+    }
 }
 
 
