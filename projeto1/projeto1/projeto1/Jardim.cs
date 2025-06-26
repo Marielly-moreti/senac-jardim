@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 
 namespace projeto1
 {
+    /*
     class Jardim
     {
         static char[,] mapa;
@@ -62,7 +63,7 @@ namespace projeto1
         }
 
 
-        static void desenharmapa()
+        static void DesenharMapa()
         {
             for (int y = 0; y < altura; y++)
             {
@@ -71,10 +72,10 @@ namespace projeto1
                     Console.Write(mapa[x, y]);
                 }
 
-                Console.Write(mapa{ playerX,y]);
+                Console.Write(mapa[playerX, playerY]);
         }
         }
-        static void atualizarposicao(ConsoleKey tecla)
+        static void AtualizarPosicao(ConsoleKey tecla)
         {
             int tempX = playerX;
             int tempY = playerY;
@@ -93,7 +94,8 @@ namespace projeto1
 
                 playerX = tempX;
                 playerY = tempY;
-
+                                                                                 
+               
 
             }
 
@@ -113,6 +115,7 @@ namespace projeto1
 
         }
     }
+    */
 }
 
 
