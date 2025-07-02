@@ -2,13 +2,13 @@
 
 namespace projeto1
 {
-    class JardimC
+    class Jogo
     {
         
 
         static void Main()
         {
-            Personagem fazenda = new Personagem();
+            Jardim fazenda = new Jardim();
     
 
 
