@@ -94,6 +94,20 @@ namespace projeto1
 
                 playerX = tempX;
                 playerY = tempY;
+
+    class Personagem
+    {
+    List <Item> Armazem = new List<Item>();
+    update(){
+    Armazem.add(Tomatin);
+    Armazem.add(Melaozin);
+    Armazem.add(Amoralina);
+    }
+
+    protected void ...() // so pode ser chamado dentro da classe
+    public void ...() // pode ser chamado de fora da classe
+
+    public char forma { get; set; } // get (pega) set (muda)
                                                                                  
                
 

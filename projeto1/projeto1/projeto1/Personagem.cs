@@ -109,14 +109,14 @@ namespace projeto1
         {
             Console.Clear();
             Console.WriteLine("Selecione um Slot");
-            Console.WriteLine("--------");
+            Console.WriteLine("-----------------------------");
             Console.WriteLine("Slot - 1");
-            Console.WriteLine("Slot - 2");
-            Console.WriteLine("Slot - 3");
-            Console.WriteLine("Slot - 4");
-            Console.WriteLine("Slot - 5");
-            Console.WriteLine("Slot - 6");
-            Console.WriteLine("--------");
+            Console.WriteLine("Slot - 2 -> Não disponível D:");
+            Console.WriteLine("Slot - 3 -> Não disponível D:");
+            Console.WriteLine("Slot - 4 -> Não disponível D:");
+            Console.WriteLine("Slot - 5 -> Não disponível D:");
+            Console.WriteLine("Slot - 6 -> Não disponível D:");
+            Console.WriteLine("-----------------------------");
             string plantacao = Console.ReadLine();
         }
 
@@ -135,5 +135,10 @@ namespace projeto1
             string sairArmazem = Console.ReadLine();
         }
 
+    }
+
+    public class JardimMapa  // define a classe principal do jogo
+    {
+        static char[,] mapa; // matriz que representa o cenario
     }
 }
