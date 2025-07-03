@@ -241,7 +241,7 @@ namespace projeto1
             Console.WriteLine("--------------");
             //Console.WriteLine("melaozin: " + armazemMelaozin);
             Console.WriteLine("--------------");
-//Console.WriteLine("amoralina: " + armazemAmoralina);
+            //Console.WriteLine("amoralina: " + armazemAmoralina);
             Console.WriteLine("--------------");
             Console.WriteLine("Aperte enter para voltar <-- ('_')");
             string sairArmazem = Console.ReadLine();
