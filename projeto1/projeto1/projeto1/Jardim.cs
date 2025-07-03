@@ -8,7 +8,7 @@ namespace projeto1
 {
     class Jardim
     {
-        public int carteira = 300;
+        public int carteira = 150;
         public int tomatin = 0;
         public int melaozin = 0;
         public int amoralina = 0;
