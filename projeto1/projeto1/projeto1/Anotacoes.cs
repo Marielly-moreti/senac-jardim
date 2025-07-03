@@ -113,14 +113,31 @@ namespace projeto1
 
             }
 
+    Class GameManager
+    {
 
+    private GameManager() { } // construtor privado, não pode ser instanciado fora da classe
 
+    private GameManager instancia;
 
+    static public GameManager Instancia => instancia ??= new GameManager(); // operador de coalescência nula, se instancia for nulo, cria uma nova instância
 
+    static public GameManager Instancia(){
+    if (instancia != null)
+        {
+           return instancia;
+         }
+        
+        instancia = new GameManager();
+        return instancia;
+        } 
 
-
-
-
+    //static (acessa pela classe) public (pode ser acessado de fora da classe) GameManager (retorno) Instancia (nome da funçao)
+    
+    public Player p1;
+    public Hud hud;          //funçoes e atributos do gerenciamento do jogo
+    public Mapa mapa;
+    public void Menu(){
 
 
 
