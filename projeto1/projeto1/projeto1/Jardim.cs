@@ -1,4 +1,4 @@
-﻿using System;
+﻿            using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -128,26 +128,30 @@ namespace projeto1
 
         }
 
-        void AtualizarPosicao(ConsoleKey tecla)
+        Vector2 pos = new Vector2(1, 1);
+        
+        public void AtualizarPosicao(ConsoleKey tecla)
         {
-            int tempX = playerX;
-            int tempY = playerY;
+            int oldX = pos.x;
+            int oldY = pos.y;
+            int x = pos.x;
+            int y = pos.y;
 
             switch (tecla)
             {
-                case ConsoleKey.A: tempX--; break;
-                case ConsoleKey.D: tempX++; break;
-                case ConsoleKey.W: tempY--; break;
-                case ConsoleKey.S: tempY++; break;
+                case ConsoleKey.A: x = pos.Left; break;
+                case ConsoleKey.D: x = pos.Right; break;
+                case ConsoleKey.W: y = pos.Up; break;
+                case ConsoleKey.S: y = pos.Down; break;
                 case ConsoleKey.E: EscolherSemente(); break;
             }
-            if (mapa[tempX, tempY] == ' ')
+            if (mapa[oldX, oldY] == ' ')
             {
                 mapa[playerX, playerY] = ' ';
-                mapa[tempX, tempY] = '@';
+                mapa[oldX, oldY] = '@';
 
-                playerX = tempX;
-                playerY = tempY;
+                pos.x = oldX;
+                pos.y = oldY;
             }
         }
         void EscolherSemente()
