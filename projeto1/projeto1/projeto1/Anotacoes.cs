@@ -146,6 +146,27 @@ namespace projeto1
 
         }
     }
+
+    Mono Behaviour
+    {
+       Run() {      //     Start() { }    //       Stop() {       //       Update() { }       //      Awake() { }     //      LateUpdate() { }    //     OnDestroy() { }
+       
+       Awake() {                                rodando = false
+       Start() {                                This.Thread.Join();
+                                                }
+       Thread T = new Thread(() => 
+       {
+       while (rodando) 
+       {
+         Update();
+         LateUpdate();
+         Thread.sleep (800);
+       }
+       OnDestroy();
+
+     }
+     t.Start(); }
+     
     */
 }
 
