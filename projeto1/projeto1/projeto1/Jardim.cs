@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace projeto1
 {
-    class Jardim
+
+    class Jardim : MonoBehaviour
     {
+        private Jardim() { }
+        static private Jardim instancia;
+        static public Jardim Instancia => instancia ??= new Jardim();
+
         public int carteira = 150;
         public int tomatin = 0;
         public int melaozin = 0;
@@ -18,15 +23,8 @@ namespace projeto1
         public int melaozinPreço = 100;
         public int amoralinaPreço = 200;
 
-        public char[,] mapa;
-        public int largura = 20;
-        public int altura = 10;
+       
         Vector2 pos = new Vector2(2, 2);
-
-        public Jardim()
-        {
-            iniciarmapa();
-        }
 
         public void ComprarSemente()
         {
@@ -64,7 +62,7 @@ namespace projeto1
         {
             if (carteira >= tomatinPreço)
             {
-                Item semente_tomatin = new Item('.',"tomatin",50,ConsoleColor.Red);
+                Item semente_tomatin = new Item('.',"tomatin",50,ConsoleColor.Red, Item.Tomatin);
                 armazem.Add(semente_tomatin);
                 int resultado = carteira - tomatinPreço;
                 carteira = resultado;
@@ -82,7 +80,7 @@ namespace projeto1
         {
             if (carteira >= melaozinPreço)
             {
-                Item semente_melaozin = new Item('.', "melaozin", 100, ConsoleColor.Yellow);
+                Item semente_melaozin = new Item('.', "melaozin", 100, ConsoleColor.Yellow, Item.Melaozin);
                 armazem.Add(semente_melaozin);
                 int resultado = carteira - melaozinPreço;
                 carteira = resultado;
@@ -100,7 +98,7 @@ namespace projeto1
         {
             if (carteira >= amoralinaPreço)
             {
-                Item semente_amoralina = new Item('.', "amoralina", 200, ConsoleColor.Magenta);
+                Item semente_amoralina = new Item('.', "amoralina", 200, ConsoleColor.Magenta, Item.Amoralina);
                 armazem.Add(semente_amoralina);
                 int resultado = carteira - amoralinaPreço;
                 carteira = resultado;
@@ -115,16 +113,12 @@ namespace projeto1
         }
 
 
-        public void Plantar()
+        public override void Update()
         {
-            
-            do { 
-                Console.Clear();
-                DesenharMapa();
-                var tecla = Console.ReadKey(true).Key;
-                AtualizarPosicao(tecla);
-            } while (pos.x != 1 || pos.y != 1);
-
+            Console.Clear();
+            DesenharMapa();
+            var tecla = Console.ReadKey(true).Key;
+            AtualizarPosicao(tecla);
         }
 
        
@@ -142,16 +136,22 @@ namespace projeto1
                 case ConsoleKey.D: x = pos.Right; break;
                 case ConsoleKey.W: y = pos.Up; break;
                 case ConsoleKey.S: y = pos.Down; break;
-                case ConsoleKey.E: EscolherSemente(); break;
+                case ConsoleKey.E: EscolherEPlantar(); break;
             }
-            if (mapa[x, y] == '#')
+
+            if (Mapa[x, y] == '#')
             {
                 pos.x = oldX;
                 pos.y = oldY;
             }
+
+            if(pos.x == 1 && pos.y == 1)
+            {
+                Stop();
+            }
         }
 
-        void EscolherSemente()
+        void EscolherEPlantar()
         {
             Console.Clear();
             int i= 0;
@@ -182,6 +182,7 @@ namespace projeto1
                     armazem[index].Quantidade--;
                     armazem[index].x = pos.x; 
                     armazem[index].y = pos.y;
+                    armazem[index].Run();
                     break;
             }
         }
@@ -198,50 +199,9 @@ namespace projeto1
             return -1;
         }
 
-        void iniciarmapa()
-        {
-            mapa = new char[largura, altura];
-            for (int y = 0; y < altura; y++)
-            {
-                for (int x = 0; x < largura; x++)
-                {
-                    // ultima posição do vetor é tamanho -1
-                    if (x == 0 || y == 0 || x == largura - 1 || y == altura - 1)
-                    {
-                        mapa[x, y] = '#';
+        
 
-                    }
-                    else
-                    {
-                        mapa[x, y] = ' ';
-                    }
-                }
-
-            }
-
-            mapa[1, 1] = 'H';
-        }
-
-        void DesenharMapa()
-        {
-            for (int y = 0; y < altura; y++)
-            {
-                for (int x = 0; x < largura; x++)
-                {
-                    Console.Write(mapa[x, y]);
-                }
-
-                Console.WriteLine();
-            }
-
-            foreach (var item in armazem)
-            {
-                item.desenhar();
-            }
-
-            Console.SetCursorPosition(pos.x, pos.y);
-            Console.Write('@');
-        }
+        
 
         public void VerArmazem()
         {
@@ -256,6 +216,8 @@ namespace projeto1
             Console.WriteLine("Aperte enter para voltar <-- ('_')");
             string sairArmazem = Console.ReadLine();
         }
+
+
 
     }
 

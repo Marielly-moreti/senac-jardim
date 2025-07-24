@@ -48,7 +48,7 @@ namespace projeto1
 
                     if (escolha == "2")
                     {
-                        fazenda.Plantar();
+                        fazenda.Run();
 
                     }
 

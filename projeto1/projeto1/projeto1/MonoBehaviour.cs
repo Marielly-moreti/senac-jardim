@@ -10,6 +10,7 @@ namespace projeto1
 
         public void Run()
         {
+            ativo = true;
             Awake();
             Start();
 
@@ -19,10 +20,10 @@ namespace projeto1
                     {
                         Update();
                         LateUpdate();
-                        Thread.Sleep(800);
+                        Thread.Sleep(500);
                     }
 
-                    OnDestroy();
+                    
                 }
                 
             );
@@ -34,6 +35,7 @@ namespace projeto1
         public void Stop()
         {
             this.ativo = false;
+            OnDestroy();
             t.Join();
         }
 
@@ -41,9 +43,6 @@ namespace projeto1
         public virtual void Start() { }
         public virtual void Update() { }
         public virtual void LateUpdate() { }
-        public virtual void OnDestroy()
-        {
-
-        }
+        public virtual void OnDestroy() { }
     }
 }

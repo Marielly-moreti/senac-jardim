@@ -167,6 +167,10 @@ namespace projeto1
      }
      t.Start(); }
      
+
+    //2,5 e 10 segundos (tempo de crescimento das plantas)
+
+
     */
 }
 

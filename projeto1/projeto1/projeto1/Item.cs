@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace projeto1
 {
-    class Item
+    class Item : MonoBehaviour
     {
         public char Forma { get; set; }
         public int x { get; set; }
@@ -16,8 +16,13 @@ namespace projeto1
         public int Tamanho { get; set; }
         public int Valor { get; set; }
         public ConsoleColor Cor { get; set; }
+        public int Tempo { get; set; }
 
-        public Item(char forma, string nome, int valor, ConsoleColor cor)
+        public static int Tomatin = 4;  //2 segundos
+        public static int Melaozin = 10;  //5 segundos
+        public static int Amoralina = 20;  //10 segundos
+
+        public Item(char forma, string nome, int valor, ConsoleColor cor, int tempo)
         {
             Forma = forma;
             Nome = nome;
@@ -25,6 +30,7 @@ namespace projeto1
             Tamanho = 0;
             Valor = valor;
             Cor = cor;
+            Tempo = tempo;
         }
 
         public void desenhar()
@@ -33,6 +39,18 @@ namespace projeto1
             Console.SetCursorPosition(x, y);
             Console.Write(Forma);
             Console.ResetColor();
+        }
+
+        public override void Update()
+        {
+            if (Tempo > 0)
+            {
+                Tempo--;
+            }
+            else {
+                Forma = 'o'; // Representa que o item está em fase de crescimento
+                Stop();
+            }
         }
     }
 }
