@@ -21,8 +21,7 @@ namespace projeto1
         public char[,] mapa;
         public int largura = 20;
         public int altura = 10;
-        public int playerX = 2;
-        public int playerY = 2;
+        Vector2 pos = new Vector2(2, 2);
 
         public Jardim()
         {
@@ -124,11 +123,11 @@ namespace projeto1
                 DesenharMapa();
                 var tecla = Console.ReadKey(true).Key;
                 AtualizarPosicao(tecla);
-            } while (playerX != 1 && playerY != 1);
+            } while (pos.x != 1 || pos.y != 1);
 
         }
 
-        Vector2 pos = new Vector2(1, 1);
+       
         
         public void AtualizarPosicao(ConsoleKey tecla)
         {
@@ -145,15 +144,13 @@ namespace projeto1
                 case ConsoleKey.S: y = pos.Down; break;
                 case ConsoleKey.E: EscolherSemente(); break;
             }
-            if (mapa[oldX, oldY] == ' ')
+            if (mapa[x, y] == '#')
             {
-                mapa[playerX, playerY] = ' ';
-                mapa[oldX, oldY] = '@';
-
                 pos.x = oldX;
                 pos.y = oldY;
             }
         }
+
         void EscolherSemente()
         {
             Console.Clear();
@@ -172,16 +169,22 @@ namespace projeto1
                     int index = TransformeEmNumero(tecla);
                     if (index < 0 || index >= armazem.Count)
                     {
-                        Console.WriteLine("Opção inválida. Tente novamente.");
+                        Console.WriteLine("Opção inválida. Tente novamente. \n Aperte qualquer tecla para voltar");
+                        Console.ReadKey(true);
+                        return;
+                    }
+                    if (armazem[index].Quantidade < 1)
+                    {
+                        Console.WriteLine("Você não tem sementes suficientes para plantar.\n Aperte qualquer tecla para voltar");
+                        Console.ReadKey(true);
                         return;
                     }
                     armazem[index].Quantidade--;
-                    armazem[index].x = playerX;
-                    armazem[index].y = playerY;
+                    armazem[index].x = pos.x; 
+                    armazem[index].y = pos.y;
                     break;
             }
         }
-
 
         int TransformeEmNumero(ConsoleKey tecla)
         {
@@ -216,7 +219,7 @@ namespace projeto1
 
             }
 
-            mapa[playerX, playerY] = '@';
+            mapa[1, 1] = 'H';
         }
 
         void DesenharMapa()
@@ -235,6 +238,9 @@ namespace projeto1
             {
                 item.desenhar();
             }
+
+            Console.SetCursorPosition(pos.x, pos.y);
+            Console.Write('@');
         }
 
         public void VerArmazem()
