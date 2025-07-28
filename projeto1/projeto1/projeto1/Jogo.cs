@@ -8,7 +8,7 @@ namespace projeto1
 
         static void Main()
         {
-            GameManager.Instancia.Start();
+           GameManager gm = GameManager.Instancia;
         }
         
 

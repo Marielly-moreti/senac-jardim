@@ -6,63 +6,41 @@ using System.Threading.Tasks;
 
 namespace projeto1
 {
-    class GameManager
+    public class GameManager : MonoBehaviour
     {
-        private GameManager() { } 
+        private GameManager() 
+        {
+        Run();
+        } 
         static private GameManager instancia;
         static public GameManager Instancia => instancia ??= new GameManager(); 
+        
+        public Mapa mapa;
+        public Menu menu;
+        public Jardim jardim;
 
-        public void Start()
+        public override void Update()
         {
-            Jardim fazenda = new Jardim();
+            Console.Clear();
+            Draw();
+            var tecla = Console.ReadKey(true).Key;
+            Jardim.Instancia.AtualizarPosicao(tecla);
+        }
 
+        public override void Draw()
+        {
+            if (menu != null && menu.visible) menu.Draw();
+            if (mapa != null && mapa.visible) mapa.Draw();
+            if (jardim != null && jardim.visible) jardim.Draw();
 
+        }
 
+        public override void Start()
+        {
 
-            bool acontecendo = true;
-
-            Console.WriteLine("Jardinzinho da Silva");
-            Console.WriteLine("Play - 1");
-            Console.WriteLine("Opçoes - 2");
-            Console.WriteLine("Sair - 3");
-            string tecla = Console.ReadLine();
-
-            while (acontecendo)
-            {
-                if (tecla == "1")
-                {
-                    Console.Clear();
-                    Console.WriteLine("Moedinhas: " + fazenda.carteira);
-                    Console.WriteLine("1 - Comprar Semente");
-                    Console.WriteLine("2 - Plantar");
-                    Console.WriteLine("3 - Regar");
-                    Console.WriteLine("4 - Colher");
-                    Console.WriteLine("5 - Ver armazem");
-                    string escolha = Console.ReadLine();
-
-                    if (escolha == "1")
-                    {
-                        fazenda.ComprarSemente();
-
-                    }
-
-                    if (escolha == "2")
-                    {
-                        fazenda.Run();
-
-                    }
-
-                    if (escolha == "5")
-                    {
-                        fazenda.VerArmazem();
-
-
-                    }
-                }
-
-
-            }
-
+            menu = Menu.Instancia;
+            menu.visible = true;
+            menu.input = true;
 
         }
 

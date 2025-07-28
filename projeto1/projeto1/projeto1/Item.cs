@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace projeto1
 {
-    class Item : MonoBehaviour
+    public  class Item : MonoBehaviour
     {
         public char Forma { get; set; }
         public int x { get; set; }
@@ -33,7 +33,7 @@ namespace projeto1
             Tempo = tempo;
         }
 
-        public void desenhar()
+        public override void Draw()
         {
             Console.ForegroundColor = Cor;
             Console.SetCursorPosition(x, y);

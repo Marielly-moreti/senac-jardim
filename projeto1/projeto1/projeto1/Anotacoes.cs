@@ -170,6 +170,9 @@ namespace projeto1
 
     //2,5 e 10 segundos (tempo de crescimento das plantas)
 
+    menu=qwehqiue
+    visble=true
+
 
     */
 }

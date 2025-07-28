@@ -6,16 +6,22 @@ using System.Threading.Tasks;
 
 namespace projeto1
 {
-    public class Mapa
+    public class Mapa: MonoBehaviour
     {
-        private Mapa() { }
+        private Mapa() 
+        {
+            Run();
+        }
         static private Mapa instancia;
         static public Mapa Instancia => instancia ??= new Mapa();
 
         public char[,] mapa;
         public int largura = 20;
         public int altura = 10;
-
+        public override void Start() 
+        {
+        iniciarmapa();
+        }
         public void iniciarmapa()
         {
             mapa = new char[largura, altura];
@@ -39,8 +45,11 @@ namespace projeto1
 
             mapa[1, 1] = 'H';
         }
+       public override void Update() 
+       {
 
-       public void DesenharMapa()
+       }
+       public override void Draw()
         {
             for (int y = 0; y < altura; y++)
             {
@@ -52,12 +61,12 @@ namespace projeto1
                 Console.WriteLine();
             }
 
-            foreach (var item in armazem)
+            foreach (var item in Jardim.Instancia.armazem)
             {
-                item.desenhar();
+                item.Draw();
             }
 
-            Console.SetCursorPosition(pos.x, pos.y);
+            Console.SetCursorPosition(Jardim.Instancia.pos.x, Jardim.Instancia.pos.y);
             Console.Write('@');
         }
     }

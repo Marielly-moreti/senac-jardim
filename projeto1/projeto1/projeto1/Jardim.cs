@@ -1,4 +1,4 @@
-﻿            using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 namespace projeto1
 {
 
-    class Jardim : MonoBehaviour
+    public class Jardim : MonoBehaviour
     {
-        private Jardim() { }
+        private Jardim() 
+        {
+        Run();
+        }
         static private Jardim instancia;
         static public Jardim Instancia => instancia ??= new Jardim();
 
@@ -24,7 +27,9 @@ namespace projeto1
         public int amoralinaPreço = 200;
 
        
-        Vector2 pos = new Vector2(2, 2);
+        public Vector2 pos = new Vector2(2, 2);
+
+        public override void Draw() { }
 
         public void ComprarSemente()
         {
@@ -58,7 +63,7 @@ namespace projeto1
 
         }
 
-        void comprarTomatin()
+        public void comprarTomatin()
         {
             if (carteira >= tomatinPreço)
             {
@@ -76,7 +81,7 @@ namespace projeto1
             }
         }
 
-        void comprarMelaozin()
+        public void comprarMelaozin()
         {
             if (carteira >= melaozinPreço)
             {
@@ -94,7 +99,7 @@ namespace projeto1
             }
         }
 
-        void comprarAmoralina()
+        public void comprarAmoralina()
         {
             if (carteira >= amoralinaPreço)
             {
@@ -110,19 +115,7 @@ namespace projeto1
                 Console.WriteLine("---------------------------------------------------");
                 string comprinhas2 = Console.ReadLine();
             }
-        }
-
-
-        public override void Update()
-        {
-            Console.Clear();
-            DesenharMapa();
-            var tecla = Console.ReadKey(true).Key;
-            AtualizarPosicao(tecla);
-        }
-
-       
-        
+        } 
         public void AtualizarPosicao(ConsoleKey tecla)
         {
             int oldX = pos.x;
@@ -139,7 +132,7 @@ namespace projeto1
                 case ConsoleKey.E: EscolherEPlantar(); break;
             }
 
-            if (Mapa[x, y] == '#')
+            if (Mapa.Instancia.mapa[x, y] == '#')
             {
                 pos.x = oldX;
                 pos.y = oldY;
@@ -151,7 +144,7 @@ namespace projeto1
             }
         }
 
-        void EscolherEPlantar()
+        public void EscolherEPlantar()
         {
             Console.Clear();
             int i= 0;
@@ -187,7 +180,7 @@ namespace projeto1
             }
         }
 
-        int TransformeEmNumero(ConsoleKey tecla)
+        public int TransformeEmNumero(ConsoleKey tecla)
         {
             if (tecla >= ConsoleKey.D0 && tecla <= ConsoleKey.D9)
             {
@@ -207,11 +200,11 @@ namespace projeto1
         {
             Console.Clear();
             Console.WriteLine("--------------");
-            //Console.WriteLine("tomatin: " + armazemTomatin);
+            Console.WriteLine("tomatin: " + armazem);
             Console.WriteLine("--------------");
-            //Console.WriteLine("melaozin: " + armazemMelaozin);
+            Console.WriteLine("melaozin: " + armazem);
             Console.WriteLine("--------------");
-            //Console.WriteLine("amoralina: " + armazemAmoralina);
+            Console.WriteLine("amoralina: " + armazem);
             Console.WriteLine("--------------");
             Console.WriteLine("Aperte enter para voltar <-- ('_')");
             string sairArmazem = Console.ReadLine();

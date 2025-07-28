@@ -7,6 +7,8 @@ namespace projeto1
     {
         private Thread t;
         private bool ativo = true;
+        public bool visible = true;
+        public bool input = true;
 
         public void Run()
         {
@@ -23,9 +25,9 @@ namespace projeto1
                         Thread.Sleep(500);
                     }
 
-                    
+
                 }
-                
+
             );
 
             t.Start();
@@ -44,5 +46,6 @@ namespace projeto1
         public virtual void Update() { }
         public virtual void LateUpdate() { }
         public virtual void OnDestroy() { }
+        public abstract void Draw();
     }
 }
