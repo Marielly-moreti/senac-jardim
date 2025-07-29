@@ -11,7 +11,7 @@ namespace projeto1
     {
         private Jardim() 
         {
-        Run();
+            Run();
         }
         static private Jardim instancia;
         static public Jardim Instancia => instancia ??= new Jardim();
@@ -26,12 +26,52 @@ namespace projeto1
         public int melaozinPreço = 100;
         public int amoralinaPreço = 200;
 
-       
-        public Vector2 pos = new Vector2(2, 2);
 
-        public override void Draw() { }
+        public override void Draw() {
+            Console.Clear();
+            Console.WriteLine("Moedinhas: " + GameManager.Instancia.jardim.carteira);
+            Console.WriteLine("1 - Comprar Semente");
+            Console.WriteLine("2 - Plantar");
+            Console.WriteLine("3 - Regar");
+            Console.WriteLine("4 - Colher");
+            Console.WriteLine("5 - Ver armazem");
+        }
 
-        public void ComprarSemente()
+        public override void Update()
+        {
+            if (!input) return;
+
+            ConsoleKey tecla = Console.ReadKey(true).Key;
+            switch (tecla)
+            {
+                case ConsoleKey.NumPad1:
+                case ConsoleKey.D1:
+                    visible = false;
+                    input = false;
+
+                    ComprarSemente();
+                    break;
+
+                case ConsoleKey.NumPad2:
+                case ConsoleKey.D2:
+                    visible = false;
+                    input = false;
+
+                    GameManager.Instancia.mapa = Mapa.Instancia;
+                    GameManager.Instancia.mapa.visible = true;
+                    GameManager.Instancia.mapa.input = true;
+                    break;
+
+                case ConsoleKey.NumPad5:
+                case ConsoleKey.D5:
+                    visible = false;
+                    input = false;
+                    VerArmazem();
+                    break;
+            }
+        }
+
+        private void ComprarSemente()
         {
             Console.Clear();
             Console.WriteLine("Moedinhas: " + carteira);
@@ -41,29 +81,31 @@ namespace projeto1
             Console.WriteLine("3 - amoralina = 200$");
             Console.WriteLine("--------------------");
             Console.WriteLine("4 - voltar");
-            string comprinhas = Console.ReadLine();
+            
+            ConsoleKey tecla = Console.ReadKey(true).Key;
 
 
-            switch (comprinhas)
+            switch (tecla)
             {
-                case "1":
+                case ConsoleKey.NumPad1:
+                case ConsoleKey.D1:
                     comprarTomatin();
                     break;
-                case "2":
+                case ConsoleKey.NumPad2:
+                case ConsoleKey.D2:
                     comprarMelaozin();
                     break;
-                case "3":
+                case ConsoleKey.NumPad3:
+                case ConsoleKey.D3:
                     comprarAmoralina();
                     break;
-                case "4":
-                    Console.Clear();
-                    break;
-
             }
+            visible = true;
+            input = true;
 
         }
 
-        public void comprarTomatin()
+        private void comprarTomatin()
         {
             if (carteira >= tomatinPreço)
             {
@@ -81,7 +123,7 @@ namespace projeto1
             }
         }
 
-        public void comprarMelaozin()
+        private void comprarMelaozin()
         {
             if (carteira >= melaozinPreço)
             {
@@ -99,7 +141,7 @@ namespace projeto1
             }
         }
 
-        public void comprarAmoralina()
+        private void comprarAmoralina()
         {
             if (carteira >= amoralinaPreço)
             {
@@ -116,87 +158,8 @@ namespace projeto1
                 string comprinhas2 = Console.ReadLine();
             }
         } 
-        public void AtualizarPosicao(ConsoleKey tecla)
-        {
-            int oldX = pos.x;
-            int oldY = pos.y;
-            int x = pos.x;
-            int y = pos.y;
-
-            switch (tecla)
-            {
-                case ConsoleKey.A: x = pos.Left; break;
-                case ConsoleKey.D: x = pos.Right; break;
-                case ConsoleKey.W: y = pos.Up; break;
-                case ConsoleKey.S: y = pos.Down; break;
-                case ConsoleKey.E: EscolherEPlantar(); break;
-            }
-
-            if (Mapa.Instancia.mapa[x, y] == '#')
-            {
-                pos.x = oldX;
-                pos.y = oldY;
-            }
-
-            if(pos.x == 1 && pos.y == 1)
-            {
-                Stop();
-            }
-        }
-
-        public void EscolherEPlantar()
-        {
-            Console.Clear();
-            int i= 0;
-            foreach (var item in armazem)
-            {
-                Console.WriteLine(""+i + " - " + item.Nome + " (" + item.Quantidade + ")");
-                i++;
-            }
-            Console.WriteLine("Escolha uma semente para plantar (ou pressione 'E' para voltar):");
-            var tecla = Console.ReadKey(true).Key;
-            switch (tecla)
-            {
-                case ConsoleKey.E: return;
-                default:
-                    int index = TransformeEmNumero(tecla);
-                    if (index < 0 || index >= armazem.Count)
-                    {
-                        Console.WriteLine("Opção inválida. Tente novamente. \n Aperte qualquer tecla para voltar");
-                        Console.ReadKey(true);
-                        return;
-                    }
-                    if (armazem[index].Quantidade < 1)
-                    {
-                        Console.WriteLine("Você não tem sementes suficientes para plantar.\n Aperte qualquer tecla para voltar");
-                        Console.ReadKey(true);
-                        return;
-                    }
-                    armazem[index].Quantidade--;
-                    armazem[index].x = pos.x; 
-                    armazem[index].y = pos.y;
-                    armazem[index].Run();
-                    break;
-            }
-        }
-
-        public int TransformeEmNumero(ConsoleKey tecla)
-        {
-            if (tecla >= ConsoleKey.D0 && tecla <= ConsoleKey.D9)
-            {
-                return (int)tecla - (int)ConsoleKey.D0;
-            }
-            else if (tecla >= ConsoleKey.NumPad0 && tecla <= ConsoleKey.NumPad9) {
-                return (int)tecla - (int)ConsoleKey.NumPad0;
-            }
-            return -1;
-        }
-
-        
-
-        
-
-        public void VerArmazem()
+       
+        private void VerArmazem()
         {
             Console.Clear();
             Console.WriteLine("--------------");
@@ -206,10 +169,13 @@ namespace projeto1
             Console.WriteLine("--------------");
             Console.WriteLine("amoralina: " + armazem);
             Console.WriteLine("--------------");
-            Console.WriteLine("Aperte enter para voltar <-- ('_')");
-            string sairArmazem = Console.ReadLine();
+            Console.WriteLine("Aperte qualquer tecla para voltar <-- ('_')");
+            Console.ReadKey(true);
+            visible = true;
+            input = true;
         }
 
+       
 
 
     }

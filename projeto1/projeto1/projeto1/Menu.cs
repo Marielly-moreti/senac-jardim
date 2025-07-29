@@ -16,59 +16,54 @@ namespace projeto1
         static private Menu instancia;
         static public Menu Instancia => instancia ??= new Menu();
 
-
-        public string tecla;
-
-        Jardim fazenda = Jardim.Instancia;
-
         public override void Update()
         {
             if (!input) return;
-            tecla = Console.ReadLine();
-            GameManager.Instancia.jardim = fazenda;
 
-            string escolha = Console.ReadLine();
-            switch (escolha)
+            ConsoleKey tecla = Console.ReadKey(true).Key;
+
+
+            switch (tecla)
             {
-                case "1":
-                GameManager.Instancia.visible = false;
-                GameManager.Instancia.input = false;
-                fazenda.ComprarSemente();
-                break;
+                case ConsoleKey.NumPad1:
+                case ConsoleKey.D1:
+                    visible = false;
+                    input = false;
 
-                case "2":
-                fazenda.Run();
-                break;
 
-                case "5":
-                fazenda.VerArmazem();
-                break;
+                    GameManager.Instancia.jardim = Jardim.Instancia;
+                    GameManager.Instancia.jardim.visible = true;
+                    GameManager.Instancia.jardim.input = true;
+
+                    break;
+
+                case ConsoleKey.NumPad2:
+                case ConsoleKey.D2:
+                    Console.Clear();
+                    Console.WriteLine("Não implementado");
+                    Console.WriteLine("Aperte qualquer tecla para voltar");
+                    Console.ReadKey(true);
+                    break;
+
+                case ConsoleKey.NumPad3:
+                case ConsoleKey.D3:
+                    Environment.Exit(0);
+                    break;
             }
+            
         }
 
 
 
         public override void Draw()
-        {            
-                Console.WriteLine("Jardinzinho da Silva");
-                Console.WriteLine("Play - 1");
-                Console.WriteLine("Opçoes - 2");
-                Console.WriteLine("Sair - 3");
- 
-
-            if (tecla == "1")
-            {
-                Console.Clear();     
-               
-
-                Console.WriteLine("Moedinhas: " + fazenda.carteira);
-                Console.WriteLine("1 - Comprar Semente");
-                Console.WriteLine("2 - Plantar");
-                Console.WriteLine("3 - Regar");
-                Console.WriteLine("4 - Colher");
-                Console.WriteLine("5 - Ver armazem");
-           
-            }   
+        {
+            Console.Clear();
+            
+            Console.WriteLine("Jardinzinho da Silva");
+            Console.WriteLine("Play - 1");
+            Console.WriteLine("Opçoes - 2");
+            Console.WriteLine("Sair - 3");
+            
         }
     }
 }
