@@ -58,7 +58,7 @@ namespace projeto1
             int i = 0;
             foreach (var item in GameManager.Instancia.jardim.armazem)
             {
-                Console.WriteLine("" + i + " - " + item.Nome + " (" + item.Quantidade + ")");
+                Console.WriteLine("" + i + " - " + item.Nome + "(" + item.Quantidade + ")");
                 i++;
             }
             Console.WriteLine("Escolha uma semente para plantar (ou pressione 'E' para voltar):");

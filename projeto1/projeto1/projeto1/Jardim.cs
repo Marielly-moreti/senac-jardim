@@ -32,9 +32,7 @@ namespace projeto1
             Console.WriteLine("Moedinhas: " + GameManager.Instancia.jardim.carteira);
             Console.WriteLine("1 - Comprar Semente");
             Console.WriteLine("2 - Plantar");
-            Console.WriteLine("3 - Regar");
-            Console.WriteLine("4 - Colher");
-            Console.WriteLine("5 - Ver armazem");
+            Console.WriteLine("3 - Ver armazem");
         }
 
         public override void Update()
@@ -62,8 +60,8 @@ namespace projeto1
                     GameManager.Instancia.mapa.input = true;
                     break;
 
-                case ConsoleKey.NumPad5:
-                case ConsoleKey.D5:
+                case ConsoleKey.NumPad3:
+                case ConsoleKey.D3:
                     visible = false;
                     input = false;
                     VerArmazem();
